@@ -1,5 +1,5 @@
 {
-  "name": "sdk",
+  "name": "SimpleHold Extension SDK",
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,7 +8,6 @@
     "build": "tsc --project ./",
     "start": "node build/index.js"
   },
-  "license": "MIT",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
@@ -18,5 +17,8 @@
     "nodemon": "^2.0.7",
     "prettier": "^2.2.1",
     "typescript": "^4.2.4"
-  }
+  },
+  "repository": "https://github.com/SimpleHold/extension-sdk.git",
+  "author": "Lucas Root <lucas@simpleswap.io>",
+  "license": "MIT"
 }
