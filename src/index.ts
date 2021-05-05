@@ -74,8 +74,8 @@ const createCurrencyLogo = (logo: string, background: string): HTMLDivElement =>
   const currencyLogo = <HTMLImageElement>document.createElement('img');
   currencyLogo.src = logo;
 
-  currencyLogo.style.width = '12px';
-  currencyLogo.style.height = '12px';
+  currencyLogo.style.width = '10px';
+  currencyLogo.style.height = '10px';
 
   currencyLogoRow.style.width = '16px';
   currencyLogoRow.style.height = '16px';
