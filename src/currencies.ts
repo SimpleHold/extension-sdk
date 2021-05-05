@@ -57,14 +57,14 @@ const currencies: ICurrency[] = [
       "data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0)'%3E%3Cpath d='M9.91721 13.8325V7.66313L3.89096 10.3025L9.91721 13.8325ZM9.91721 7.23876V-0.00499268L4.08534 9.79313L9.91721 7.23876ZM10.3053 -0.00811768V7.23876L16.2191 9.82938L10.3053 -0.00811768ZM10.3053 7.66313V13.8325L16.3353 10.3044L10.3053 7.66313ZM9.91721 20.0356V15.0738L3.93159 11.5694L9.91721 20.0356ZM10.3053 20.0356L16.291 11.5688L10.3053 15.0731V20.0356Z' fill='white'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0'%3E%3Crect width='20' height='20' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A",
   },
   {
-    symbol: 'bnb-bsc',
+    symbol: 'bnb',
     background: '#EBBB4E',
     type: 'currency',
     logo:
       "data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0)'%3E%3Cpath d='M6.19675 8.54732L10.0328 4.71127L13.8708 8.54929L16.103 6.3172L10.0328 0.24707L3.96464 6.31521L6.19675 8.54732ZM0.15625 10.1236L2.38834 7.89151L4.62045 10.1236L2.38834 12.3557L0.15625 10.1236ZM6.19675 11.6999L10.0328 15.536L13.8708 11.6979L16.103 13.929L10.0328 20.0002L3.96464 13.932L3.96169 13.929L6.19675 11.6999ZM15.4451 10.1236L17.6772 7.89151L19.9094 10.1236L17.6772 12.3557L15.4451 10.1236ZM12.2965 10.1216H12.2985V10.1236L10.0328 12.3893L7.77008 10.1276L7.76613 10.1236L7.77008 10.1206L8.16612 9.72362L8.35872 9.53102L10.0328 7.85793L12.2975 10.1226L12.2965 10.1216Z' fill='white'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0'%3E%3Crect width='20' height='20' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A",
   },
   {
-    symbol: 'usdterc20',
+    symbol: 'usdt',
     background: '#132BD8',
     type: 'token',
     chain: 'eth',

@@ -119,16 +119,23 @@ export const init = (params: IParams): void => {
 };
 
 export const setCurrency = (symbol: string, chain?: 'eth' | 'bsc'): void => {
-  const checkExist = currencies.find(
-    (currency: ICurrency) =>
-      toLower(currency.symbol) === toLower(symbol) && toLower(currency.chain) === toLower(chain)
-  );
+  const checkExist = currencies.find((currency: ICurrency) => {
+    const findBySymbol = toLower(currency.symbol) === toLower(symbol);
+
+    if (chain?.length) {
+      return findBySymbol && toLower(currency.chain) === toLower(chain);
+    }
+
+    return findBySymbol;
+  });
 
   if (checkExist) {
     const { logo, background, chain: existChain } = checkExist;
     const findButton: HTMLElement | null = document.getElementById('sh-button');
 
     if (findButton) {
+      findButton.removeAttribute('sh-currency-chain');
+
       const findCurrencyLogo: HTMLElement | null = document.getElementById('sh-currency-logo');
 
       if (findCurrencyLogo) {
