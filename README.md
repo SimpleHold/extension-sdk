@@ -53,32 +53,44 @@ import * as React from 'react'
 import * as SimpleHoldSDK from 'simplehold-extension-sdk'
 
 const Example: React.FC = () => {
-	const [address, setAddress] = React.useState<string>('')
+  const [address, setAddress] = React.useState<string>('')
 
-  	React.useEffect(() => {
-  		document.addEventListener('sh-select-address', (data) => {
-	  		const { detail: { address } } = data;
+  React.useEffect(() => {
+    document.addEventListener(
+      'sh-select-address',
+      (data) => {
+        const {
+          detail: { address },
+        } = data
 
-	  		setAddress(address);
-	 	}, false);
+        setAddress(address)
+      },
+      false
+    )
 
-	 	return () => {
-	 		document.removeEventListener('sh-select-address', (data) => {
-				const { detail: { address } } = data;
+    return () => {
+      document.removeEventListener(
+        'sh-select-address',
+        (data) => {
+          const {
+            detail: { address },
+          } = data
 
-				setAddress(address);
-			}, false);
-		};
-	}, []);
+          setAddress(address)
+        },
+        false
+      )
+    }
+  }, [])
 
   return (
     <div>
-		<div id="my-button" />
-		<input
-			id="my-input"
-			value={address}
-			onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAddress(e.target.value)}
-			/>
+      <div id="my-button" />
+      <input
+        id="my-input"
+        value={address}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAddress(e.target.value)}
+      />
     </div>
   )
 }
