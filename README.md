@@ -40,7 +40,7 @@ This method will draw a button on the site that the user can click to select the
 SimpleHoldSDK.init({
   buttonId: 'my-button',
   inputId: 'my-input',
-  size: 'small', // small or big
+  size: 'small', // small or large
 });
 ```
 
