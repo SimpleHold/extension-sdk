@@ -1,4 +1,4 @@
-# simplehold-sdk
+# simplehold
 
 ### SDK for SimpleHold Extension Wallet
 
@@ -17,13 +17,13 @@
 yarn:
 
 ```
-yarn add simplehold-sdk
+yarn add simplehold
 ```
 
 npm:
 
 ```
-npm install simplehold-sdk
+npm install simplehold
 ```
 
 ## Check is installed
@@ -50,7 +50,7 @@ The example below was written for react app
 
 ```
 import * as React from 'react'
-import * as SimpleHoldSDK from 'simplehold-sdk'
+import * as SimpleHoldSDK from 'simplehold'
 
 const Example: React.FC = () => {
   const [address, setAddress] = React.useState<string>('')
