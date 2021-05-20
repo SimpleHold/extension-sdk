@@ -21,6 +21,7 @@ export interface ISendButtonParams {
   currency?: string;
   amount?: number;
   recipientAddress?: string;
+  chain?: string;
 }
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -272,7 +273,7 @@ export const getCurrencies = (): ICurrency[] => {
   return currencies;
 };
 
-const createButtonn = (
+const getSendButton = (
   type: 'send' | 'selectAddress',
   size: 'large' | 'small',
   buttonId: string
@@ -286,17 +287,22 @@ const createButtonn = (
   const button = <HTMLDivElement>document.createElement('div');
   button.id = buttonId;
 
-  button.style.width = size === 'large' ? '130px' : '34px';
+  button.style.width = size === 'large' ? '192px' : '34px';
   button.style.height = '34px';
   button.style.backgroundColor = '#3FBB7D';
   button.style.borderRadius = '6px';
-  button.style.position = 'relative';
-  button.style.overflow = 'hidden';
+
+  if (size === 'large') {
+    button.style.position = 'relative';
+    button.style.overflow = 'hidden';
+    button.style.display = 'flex';
+    button.style.alignItems = 'center';
+  }
 
   return button;
 };
 
-const createLogoo = (): HTMLImageElement => {
+const getSendLogo = (size: 'small' | 'large'): HTMLImageElement => {
   const logo = <HTMLImageElement>document.createElement('img');
 
   logo.id = 'sh-send-logo';
@@ -305,9 +311,62 @@ const createLogoo = (): HTMLImageElement => {
 
   logo.style.width = '22.2px';
   logo.style.height = '20px';
-  logo.style.margin = '4px 0 0 4px';
+  logo.style.margin = size === 'small' ? '4px 0 0 4px' : '10px 0 0 10px';
 
   return logo;
+};
+
+const getSendLabelRow = (): HTMLDivElement => {
+  const sendLabelRow = <HTMLDivElement>document.createElement('div');
+
+  sendLabelRow.style.display = 'flex';
+  sendLabelRow.style.flexDirection = 'row';
+  sendLabelRow.style.alignItems = 'center';
+  sendLabelRow.style.margin = '0 0 0 14px';
+
+  return sendLabelRow;
+};
+
+const getSendLabel = (): HTMLSpanElement => {
+  const sendLabel = <HTMLSpanElement>document.createElement('span');
+
+  sendLabel.innerText = 'Send with';
+
+  sendLabel.style.fontWeight = '500';
+  sendLabel.style.fontSize = '13px';
+  sendLabel.style.lineHeight = '15px';
+  sendLabel.style.color = '#FFFFFF';
+  sendLabel.style.fontFamily = 'Roboto';
+
+  return sendLabel;
+};
+
+const getSendShLabel = (): HTMLSpanElement => {
+  const sendShLabel = <HTMLSpanElement>document.createElement('span');
+
+  sendShLabel.innerText = 'SimpleHold';
+
+  sendShLabel.style.margin = '0 0 0 2px';
+  sendShLabel.style.fontWeight = 'bold';
+  sendShLabel.style.fontSize = '13px';
+  sendShLabel.style.lineHeight = '15px';
+  sendShLabel.style.color = '#FFFFFF';
+  sendShLabel.style.fontFamily = 'Roboto';
+
+  return sendShLabel;
+};
+
+const getSendLogoRow = (): HTMLDivElement => {
+  const sendLogoRow = <HTMLDivElement>document.createElement('span');
+
+  sendLogoRow.style.width = '46px';
+  sendLogoRow.style.height = '46px';
+  sendLogoRow.style.borderRadius = '23px';
+  sendLogoRow.style.position = 'absolute';
+  sendLogoRow.style.right = '-5px';
+  sendLogoRow.style.background = 'rgba(255, 255, 255, 0.2)';
+
+  return sendLogoRow;
 };
 
 export const createSendButton = (params: ISendButtonParams): void => {
@@ -319,15 +378,31 @@ export const createSendButton = (params: ISendButtonParams): void => {
       currency = undefined,
       amount = undefined,
       recipientAddress = undefined,
+      chain = undefined,
     } = params;
 
     const getButton = <HTMLDivElement>document.getElementById(buttonId);
 
     if (getButton) {
-      const button = createButtonn('send', size, 'sh-send-button');
+      const button = getSendButton('send', size, 'sh-send-button');
 
-      if (size === 'small') {
-        const logo = createLogoo();
+      if (size === 'large') {
+        const labelRow = getSendLabelRow();
+        const sendLabel = getSendLabel();
+        const simpleHoldLabel = getSendShLabel();
+
+        labelRow.appendChild(sendLabel);
+        labelRow.appendChild(simpleHoldLabel);
+
+        const logoRow = getSendLogoRow();
+        const logo = getSendLogo(size);
+
+        logoRow.appendChild(logo);
+
+        button.appendChild(labelRow);
+        button.appendChild(logoRow);
+      } else {
+        const logo = getSendLogo(size);
         button.appendChild(logo);
       }
 
@@ -345,6 +420,10 @@ export const createSendButton = (params: ISendButtonParams): void => {
 
       if (recipientAddress) {
         button.setAttribute('sh-recipient-address', recipientAddress);
+      }
+
+      if (chain) {
+        button.setAttribute('sh-chain', chain);
       }
 
       document.getElementById(buttonId)?.replaceWith(button);
