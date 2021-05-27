@@ -6,7 +6,8 @@
 
 - [Install](#install)
 - [Check is installed](#check-is-installed)
-- [Init](#init)
+- [Select address button](#create-select-address-button)
+- [Send button](#create-send-address-button)
 - [Example](#example)
 - [Get supported currencies](#get-supported-currencies)
 - [Set currency](#set-currency)
@@ -32,7 +33,7 @@ npm install simplehold
 const isInstalled = await SimpleHoldSDK.isInstalled()
 ```
 
-## Init
+## Create select address button
 
 This method will draw a button on the site that the user can click to select the address
 
@@ -41,6 +42,22 @@ SimpleHoldSDK.init({
   buttonId: 'my-button',
   inputId: 'my-input',
   size: 'small', // small or large
+});
+```
+
+## Create send button
+
+This method will draw a button on the site that the user can click to send funds
+
+```
+SimpleHoldSDK.createSendButton({
+  buttonId: 'my-send-button',
+  size: 'small', // small or large
+  recipientAddress: 'address',
+  currency: 'btc', // Use getCurrencies() method for getting all supported addresses
+  amount: '0.1',
+  readOnly: false,
+  chain: undefined // Optional
 });
 ```
 
