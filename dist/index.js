@@ -3,8 +3,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getCurrencies = exports.removeCurrency = exports.setCurrency = exports.init = exports.isInstalled = void 0;
+exports.createSendButton = exports.getCurrencies = exports.removeCurrency = exports.setCurrency = exports.init = exports.isInstalled = void 0;
 const currencies_1 = __importDefault(require("./currencies"));
+const icons = {
+    send: "data:image/svg+xml,%3Csvg width='23' height='20' viewBox='0 0 23 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M13.6365 5.25219L8.77064 0.372018L8.7679 0.369278C8.4114 0.0144889 7.87019 -0.102463 7.39083 0.0971426C6.91069 0.296061 6.61133 0.762276 6.61133 1.26553V2.69167C2.86556 3.3 0 6.56243 0 10.4821C0 11.4041 0.157463 12.3087 0.470555 13.1683C0.65125 13.6644 1.12294 14.0003 1.6582 14.0003L1.6607 14.0003C1.89197 13.9997 2.11524 13.9359 2.30787 13.8205L2.31131 13.8184C2.55047 13.6738 2.74467 13.4479 2.84691 13.1671L2.84812 13.1637C3.10338 12.4546 3.50039 11.8234 4 11.2975V18.3335C4 19.2539 4.75448 20.0001 5.68517 20.0001L19.6721 20.0001C20.6028 20.0001 21.3573 19.2539 21.3573 18.3335V16.6601C21.3573 16.5703 21.2796 16.5001 21.1888 16.5001H16.3018C15.1849 16.5001 14.2796 15.6047 14.2796 14.5001V11.5001C14.2796 10.3956 15.1849 9.50012 16.3018 9.50012H21.1888C21.2796 9.50012 21.3573 9.42996 21.3573 9.34011V7.66679C21.3573 6.74632 20.6028 6.00012 19.6721 6.00012H13.9922C13.9604 5.71465 13.8326 5.45193 13.6365 5.25219ZM7.61133 1.26553C7.61133 1.15835 7.6748 1.06155 7.77441 1.02065C7.87305 0.979209 7.98633 1.00228 8.0625 1.07809L12.9229 5.95272C12.9717 6.00246 13 6.06972 13 6.14016C13 6.21053 12.9717 6.27785 12.9229 6.3276L8.0625 11.1996C7.98633 11.2755 7.87305 11.2982 7.77441 11.2571C7.6748 11.2162 7.61133 11.1193 7.61133 11.0122V8.63198C7.27206 8.64622 6.93786 8.6877 6.61133 8.75459C4.73019 9.13999 3.1032 10.3691 2.22344 12.0945C2.20469 12.1312 2.18628 12.1682 2.16822 12.2055C2.10315 12.3395 2.04253 12.4765 1.98662 12.6161C1.959 12.6851 1.93253 12.7547 1.90723 12.825C1.88574 12.8841 1.84473 12.932 1.79395 12.9627C1.75391 12.9867 1.70703 13.0001 1.6582 13.0003C1.54688 13.0003 1.44824 12.9306 1.41016 12.8261C1.38532 12.7579 1.3616 12.6893 1.339 12.6205L1.33815 12.6179C1.28822 12.4655 1.24379 12.3116 1.20487 12.1563C1.19106 12.1012 1.17794 12.0459 1.16552 11.9905C1.05542 11.4989 1 10.9943 1 10.4821C1 6.77071 3.94238 3.73507 7.61133 3.59499V1.26553ZM21.1889 10.5001C21.7473 10.5001 22.2 10.9479 22.2 11.5001V14.5001C22.2 15.0524 21.7473 15.5001 21.1889 15.5001H16.3019C15.7435 15.5001 15.2908 15.0524 15.2908 14.5001V11.5001C15.2908 10.9479 15.7435 10.5001 16.3019 10.5001H21.1889ZM17.8186 14.0001C17.2601 14.0001 16.8074 13.5524 16.8074 13.0001C16.8074 12.4479 17.2601 12.0001 17.8186 12.0001C18.377 12.0001 18.8297 12.4479 18.8297 13.0001C18.8297 13.5524 18.377 14.0001 17.8186 14.0001Z' fill='white'/%3E%3C/svg%3E%0A",
+    selectAddress: "data:image/svg+xml,%3Csvg width='19' height='14' viewBox='0 0 19 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.68517 14C0.754478 14 0 13.2538 0 12.3333V1.66667C0 0.746192 0.754478 0 1.68517 0H15.6721C16.6028 0 17.3573 0.746193 17.3573 1.66667V3.33999C17.3573 3.42984 17.2796 3.5 17.1888 3.5L12.3018 3.5C11.1849 3.5 10.2796 4.39543 10.2796 5.5V8.5C10.2796 9.60457 11.1849 10.5 12.3018 10.5H17.1888C17.2796 10.5 17.3573 10.5702 17.3573 10.66V12.3333C17.3573 13.2538 16.6028 14 15.6721 14L1.68517 14Z' fill='white'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M17.1889 4.50002C17.7473 4.50002 18.2 4.94773 18.2 5.50002V8.50002C18.2 9.05231 17.7473 9.50002 17.1889 9.50002H12.3019C11.7435 9.50002 11.2908 9.05231 11.2908 8.50002V5.50002C11.2908 4.94773 11.7435 4.50002 12.3019 4.50002H17.1889ZM13.8185 8.00002C13.2601 8.00002 12.8074 7.5523 12.8074 7.00002C12.8074 6.44773 13.2601 6.00002 13.8185 6.00002C14.377 6.00002 14.8297 6.44773 14.8297 7.00002C14.8297 7.5523 14.377 8.00002 13.8185 8.00002Z' fill='white'/%3E%3C/svg%3E%0A",
+};
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const toLower = (text) => {
     if (text === null || text === void 0 ? void 0 : text.length) {
@@ -32,13 +36,23 @@ const addCustomEventListener = (selector, event, handler) => {
         }, true);
     }
 };
-addCustomEventListener('#sh-button', 'mouseenter', () => {
+addCustomEventListener('#sh-button', 'mouseover', () => {
     const element = document.getElementById('sh-button');
     element.style.backgroundColor = '#31A76C';
     element.style.cursor = 'pointer';
 });
 addCustomEventListener('#sh-button', 'mouseleave', () => {
     const element = document.getElementById('sh-button');
+    element.style.backgroundColor = '#3FBB7D';
+    element.style.cursor = 'default';
+});
+addCustomEventListener('#sh-send-button', 'mouseover', () => {
+    const element = document.getElementById('sh-send-button');
+    element.style.backgroundColor = '#31A76C';
+    element.style.cursor = 'pointer';
+});
+addCustomEventListener('#sh-send-button', 'mouseleave', () => {
+    const element = document.getElementById('sh-send-button');
     element.style.backgroundColor = '#3FBB7D';
     element.style.cursor = 'default';
 });
@@ -49,14 +63,13 @@ const createButton = (size) => {
     }
     const button = document.createElement('div');
     button.id = 'sh-button';
-    button.style.width = size === 'large' ? '100px' : '32px';
-    button.style.height = '32px';
+    button.style.width = size === 'large' ? '130px' : '34px';
+    button.style.height = '34px';
     button.style.backgroundColor = '#3FBB7D';
     button.style.borderRadius = '6px';
     button.style.display = 'flex';
     button.style.flexDirection = 'row';
     button.style.alignItems = 'center';
-    button.style.justifyContent = 'center';
     button.style.position = 'relative';
     return button;
 };
@@ -69,25 +82,37 @@ const createButtonLabel = () => {
     label.innerText = 'SimpleHold';
     label.id = 'sh-label';
     label.style.fontWeight = 'bold';
-    label.style.fontSize = '11px';
-    label.style.lineHeight = '13px';
-    label.style.textAlign = 'center';
+    label.style.fontSize = '13px';
+    label.style.lineHeight = '15px';
     label.style.color = '#FFFFFF';
     label.style.fontFamily = 'Roboto';
-    label.style.margin = '0 0 0 5.5px';
+    label.style.margin = '0 0 0 12px';
     return label;
 };
-const createLogo = () => {
+const createLogo = (size) => {
     const findExist = document.getElementById('sh-logo');
     if (findExist) {
         findExist.remove();
     }
     const logo = document.createElement('img');
     logo.id = 'sh-logo';
-    logo.src =
-        "data:image/svg+xml,%3Csvg width='16' height='12' viewBox='0 0 16 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.44443 12C0.646695 12 0 11.3604 0 10.5714V1.42857C0 0.639593 0.646696 0 1.44443 0H13.4332C14.231 0 14.8777 0.639594 14.8777 1.42857V2.86285C14.8777 2.93986 14.8111 3 14.7332 3L10.5444 3C9.58709 3 8.81105 3.76751 8.81105 4.71429V7.28571C8.81105 8.23249 9.58709 9 10.5444 9H14.7332C14.8111 9 14.8777 9.06014 14.8777 9.13715V10.5714C14.8777 11.3604 14.231 12 13.4332 12L1.44443 12Z' fill='white'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M14.7333 3.85716C15.212 3.85716 15.6 4.24092 15.6 4.7143V7.28573C15.6 7.75912 15.212 8.14287 14.7333 8.14287H10.5445C10.0658 8.14287 9.67782 7.75912 9.67782 7.28573V4.7143C9.67782 4.24092 10.0658 3.85716 10.5445 3.85716H14.7333ZM11.8445 6.85716C11.3658 6.85716 10.9778 6.4734 10.9778 6.00002C10.9778 5.52663 11.3658 5.14287 11.8445 5.14287C12.3231 5.14287 12.7111 5.52663 12.7111 6.00002C12.7111 6.4734 12.3231 6.85716 11.8445 6.85716Z' fill='white'/%3E%3C/svg%3E%0A";
-    logo.style.width = '16px';
-    logo.style.height = '12px';
+    logo.src = icons.selectAddress;
+    logo.style.width = '18.2px';
+    logo.style.height = '14px';
+    if (size === 'large') {
+        const logoRow = document.createElement('div');
+        logoRow.style.width = '46px';
+        logoRow.style.height = '46px';
+        logoRow.style.position = 'absolute';
+        logoRow.style.right = '-5px';
+        logoRow.style.borderRadius = '23px';
+        logoRow.style.background = 'rgba(255, 255, 255, 0.2)';
+        logoRow.style.display = 'flex';
+        logoRow.style.alignItems = 'center';
+        logo.style.margin = '0 0 0 13px';
+        logoRow.appendChild(logo);
+        return logoRow;
+    }
     return logo;
 };
 const createCurrencyLogo = (logo, background) => {
@@ -113,13 +138,13 @@ const createCurrencyLogo = (logo, background) => {
 };
 const init = (params) => {
     var _a;
-    if (exports.isInstalled()) {
+    if (document.documentElement.getAttribute('sh-ex-status') === 'installed') {
         const { buttonId, inputId, size } = params;
         const getButton = document.getElementById(buttonId);
         const getInput = document.getElementById(inputId);
         if (getButton && getInput) {
             const button = createButton(size);
-            const logo = createLogo();
+            const logo = createLogo(size);
             button.appendChild(logo);
             if (size === 'large') {
                 const buttonLabel = createButtonLabel();
@@ -140,7 +165,6 @@ const setCurrency = (symbol, chain) => {
         return findBySymbol;
     });
     const findCurrencyLogo = document.getElementById('sh-currency-logo');
-    console.log('WTF??', findCurrencyLogo);
     if (findCurrencyLogo) {
         findCurrencyLogo.remove();
     }
@@ -176,3 +200,113 @@ const getCurrencies = () => {
     return currencies_1.default;
 };
 exports.getCurrencies = getCurrencies;
+const getSendButton = (type, size, buttonId) => {
+    const findExist = document.getElementById(buttonId);
+    if (findExist) {
+        findExist.remove();
+    }
+    const button = document.createElement('div');
+    button.id = buttonId;
+    button.style.width = size === 'large' ? '192px' : '34px';
+    button.style.height = '34px';
+    button.style.backgroundColor = '#3FBB7D';
+    button.style.borderRadius = '6px';
+    if (size === 'large') {
+        button.style.position = 'relative';
+        button.style.overflow = 'hidden';
+        button.style.display = 'flex';
+        button.style.alignItems = 'center';
+    }
+    return button;
+};
+const getSendLogo = (size) => {
+    const logo = document.createElement('img');
+    logo.id = 'sh-send-logo';
+    logo.src = icons.send;
+    logo.style.width = '22.2px';
+    logo.style.height = '20px';
+    logo.style.margin = size === 'small' ? '4px 0 0 4px' : '10px 0 0 10px';
+    return logo;
+};
+const getSendLabelRow = () => {
+    const sendLabelRow = document.createElement('div');
+    sendLabelRow.style.display = 'flex';
+    sendLabelRow.style.flexDirection = 'row';
+    sendLabelRow.style.alignItems = 'center';
+    sendLabelRow.style.margin = '0 0 0 14px';
+    return sendLabelRow;
+};
+const getSendLabel = () => {
+    const sendLabel = document.createElement('span');
+    sendLabel.innerText = 'Send with';
+    sendLabel.style.fontWeight = '500';
+    sendLabel.style.fontSize = '13px';
+    sendLabel.style.lineHeight = '15px';
+    sendLabel.style.color = '#FFFFFF';
+    sendLabel.style.fontFamily = 'Roboto';
+    return sendLabel;
+};
+const getSendShLabel = () => {
+    const sendShLabel = document.createElement('span');
+    sendShLabel.innerText = 'SimpleHold';
+    sendShLabel.style.margin = '0 0 0 2px';
+    sendShLabel.style.fontWeight = 'bold';
+    sendShLabel.style.fontSize = '13px';
+    sendShLabel.style.lineHeight = '15px';
+    sendShLabel.style.color = '#FFFFFF';
+    sendShLabel.style.fontFamily = 'Roboto';
+    return sendShLabel;
+};
+const getSendLogoRow = () => {
+    const sendLogoRow = document.createElement('span');
+    sendLogoRow.style.width = '46px';
+    sendLogoRow.style.height = '46px';
+    sendLogoRow.style.borderRadius = '23px';
+    sendLogoRow.style.position = 'absolute';
+    sendLogoRow.style.right = '-5px';
+    sendLogoRow.style.background = 'rgba(255, 255, 255, 0.2)';
+    return sendLogoRow;
+};
+const createSendButton = (params) => {
+    var _a;
+    if (document.documentElement.getAttribute('sh-ex-status') === 'installed') {
+        const { buttonId, size = 'small', readOnly = false, currency = undefined, amount = undefined, recipientAddress = undefined, chain = undefined, } = params;
+        const getButton = document.getElementById(buttonId);
+        if (getButton) {
+            const button = getSendButton('send', size, 'sh-send-button');
+            if (size === 'large') {
+                const labelRow = getSendLabelRow();
+                const sendLabel = getSendLabel();
+                const simpleHoldLabel = getSendShLabel();
+                labelRow.appendChild(sendLabel);
+                labelRow.appendChild(simpleHoldLabel);
+                const logoRow = getSendLogoRow();
+                const logo = getSendLogo(size);
+                logoRow.appendChild(logo);
+                button.appendChild(labelRow);
+                button.appendChild(logoRow);
+            }
+            else {
+                const logo = getSendLogo(size);
+                button.appendChild(logo);
+            }
+            if (readOnly) {
+                button.setAttribute('sh-read-only', `${readOnly}`);
+            }
+            if (currency) {
+                button.setAttribute('sh-currency', currency);
+            }
+            if (amount) {
+                button.setAttribute('sh-amount', `${amount}`);
+            }
+            if (recipientAddress) {
+                button.setAttribute('sh-recipient-address', recipientAddress);
+            }
+            if (chain) {
+                button.setAttribute('sh-chain', chain);
+            }
+            (_a = document.getElementById(buttonId)) === null || _a === void 0 ? void 0 : _a.replaceWith(button);
+        }
+    }
+};
+exports.createSendButton = createSendButton;
