@@ -22,6 +22,7 @@ export interface ISendButtonParams {
   amount?: number;
   recipientAddress?: string;
   chain?: string;
+  extraId?: string;
 }
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -105,6 +106,7 @@ const createButton = (size?: 'small' | 'large'): HTMLDivElement => {
   button.style.display = 'flex';
   button.style.flexDirection = 'row';
   button.style.alignItems = 'center';
+  button.style.justifyContent = size === 'large' ? 'flexStart' : 'center';
   button.style.position = 'relative';
 
   return button;
@@ -379,6 +381,7 @@ export const createSendButton = (params: ISendButtonParams): void => {
       amount = undefined,
       recipientAddress = undefined,
       chain = undefined,
+      extraId = undefined,
     } = params;
 
     const getButton = <HTMLDivElement>document.getElementById(buttonId);
@@ -424,6 +427,10 @@ export const createSendButton = (params: ISendButtonParams): void => {
 
       if (chain) {
         button.setAttribute('sh-chain', chain);
+      }
+
+      if (extraId) {
+        button.setAttribute('sh-extra-id', extraId);
       }
 
       document.getElementById(buttonId)?.replaceWith(button);
