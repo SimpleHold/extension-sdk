@@ -7,7 +7,7 @@
 - [Install](#install)
 - [Check is installed](#check-is-installed)
 - [Select address button](#create-select-address-button)
-- [Send button](#create-send-address-button)
+- [Send button](#create-send-button)
 - [Example](#example)
 - [Get supported currencies](#get-supported-currencies)
 - [Set currency](#set-currency)
@@ -42,6 +42,8 @@ SimpleHoldSDK.init({
   buttonId: 'my-button',
   inputId: 'my-input',
   size: 'small', // small or large
+  isRound?: true, // Optional make the button round - true or false
+  withTooltip?: true // Optional (true/false) show tooltip text
 });
 ```
 
