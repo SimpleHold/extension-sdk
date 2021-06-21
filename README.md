@@ -42,8 +42,8 @@ SimpleHoldSDK.init({
   buttonId: 'my-button',
   inputId: 'my-input',
   size: 'small', // small or large
-  isRound: true, // Optional make the button round - true or false
-  tooltipText: 'Enter with SimpleHold' // Optional tooltip text
+  isRound?: true, // Optional make the button round - true or false
+  withTooltip?: true // Optional (true/false) show tooltip text
 });
 ```
 

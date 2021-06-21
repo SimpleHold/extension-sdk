@@ -9,16 +9,16 @@ const icons = {
     "data:image/svg+xml,%3Csvg width='14' height='7' viewBox='0 0 14 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M-77.5 11C-77.5 8.51472 -75.4853 6.5 -73 6.5H0.17157C0.83461 6.5 1.4705 6.23661 1.93934 5.76777L5.93934 1.76777C6.52513 1.18198 7.47488 1.18198 8.06066 1.76777L12.0607 5.76777C12.5295 6.23661 13.1654 6.5 13.8284 6.5H87C89.4853 6.5 91.5 8.51472 91.5 11V35C91.5 37.4853 89.4853 39.5 87 39.5H-73C-75.4853 39.5 -77.5 37.4853 -77.5 35V11Z' fill='white' stroke='%23EAEAEA'/%3E%3C/svg%3E%0A",
 };
 
-export interface IParams {
+interface IParams {
   buttonId: string;
   inputId: string;
   size?: 'small' | 'large';
   currency?: string;
   isRound?: boolean;
-  tooltipText?: string;
+  withTooltip?: boolean;
 }
 
-export interface ISendButtonParams {
+interface ISendButtonParams {
   buttonId: string;
   size: 'small' | 'large';
   readOnly?: boolean;
@@ -27,6 +27,12 @@ export interface ISendButtonParams {
   recipientAddress?: string;
   chain?: string;
   extraId?: string;
+}
+
+declare global {
+  interface Window {
+    shCurrencies?: ICurrency[] | undefined;
+  }
 }
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -237,7 +243,7 @@ const getTooltipArrow = (): HTMLImageElement => {
   return arrow;
 };
 
-const createTooltip = (text: string): HTMLDivElement => {
+const createTooltip = (): HTMLDivElement => {
   const tooltip = <HTMLDivElement>document.createElement('div');
   tooltip.id = 'sh-tooltip';
 
@@ -253,7 +259,7 @@ const createTooltip = (text: string): HTMLDivElement => {
 
   const tooltipText = <HTMLSpanElement>document.createElement('span');
 
-  tooltipText.innerText = text;
+  tooltipText.innerText = 'Enter with SimpleHold';
 
   tooltipText.style.whiteSpace = 'nowrap';
   tooltipText.style.fontSize = '14px';
@@ -270,7 +276,7 @@ const createTooltip = (text: string): HTMLDivElement => {
 
 export const init = (params: IParams): void => {
   if (document.documentElement.getAttribute('sh-ex-status') === 'installed') {
-    const { buttonId, inputId, size, isRound, tooltipText } = params;
+    const { buttonId, inputId, size, isRound, withTooltip } = params;
 
     const getButton = <HTMLDivElement>document.getElementById(buttonId);
     const getInput = <HTMLInputElement>document.getElementById(inputId);
@@ -281,8 +287,8 @@ export const init = (params: IParams): void => {
 
       button.appendChild(logo);
 
-      if (tooltipText?.length && size !== 'large') {
-        const tooltip = createTooltip(tooltipText);
+      if (withTooltip && size !== 'large') {
+        const tooltip = createTooltip();
         button.appendChild(tooltip);
       }
 
@@ -298,6 +304,8 @@ export const init = (params: IParams): void => {
 };
 
 export const setCurrency = (symbol: string, chain?: 'eth' | 'bsc'): void => {
+  const currencies = getCurrencies();
+
   const checkExist = currencies.find((currency: ICurrency) => {
     const findBySymbol = toLower(currency.symbol) === toLower(symbol);
 
@@ -346,7 +354,7 @@ export const removeCurrency = (): void => {
 };
 
 export const getCurrencies = (): ICurrency[] => {
-  return currencies;
+  return window?.shCurrencies || currencies;
 };
 
 const getSendButton = (
