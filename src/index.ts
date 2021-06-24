@@ -259,7 +259,7 @@ const createTooltip = (): HTMLDivElement => {
 
   const tooltipText = <HTMLSpanElement>document.createElement('span');
 
-  tooltipText.innerText = 'Enter with SimpleHold';
+  tooltipText.innerText = 'Use your SimpleHold address';
 
   tooltipText.style.whiteSpace = 'nowrap';
   tooltipText.style.fontSize = '14px';
